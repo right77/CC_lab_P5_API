@@ -14,7 +14,6 @@ let weatherapi = 'http://api.openweathermap.org/data/2.5/weather?q=';
 let weatherlink = weatherapi + city +weatherKey ;
 
 function setup(){
-    loadJSON(weatherlink,gotWeatherData);
 
     input = createInput('New York');
     let button = createButton('submit');
@@ -32,13 +31,10 @@ function updateCity(){
     textSize(8);
 	text(city, 10, 30);
     console.log(city);
+    //weather api
     weatherlink = weatherapi + city +weatherKey ;
     loadJSON(weatherlink,gotWeatherData);
     
-    giphyLink=giphyapi+giphySearch+giphyLimtit;
-    console.log(giphyLink);
-
-    loadJSON(giphyLink,gotGiphy);
 
 
 
@@ -47,6 +43,10 @@ function updateCity(){
 function gotWeatherData(data){ //get the data from JSON
     //console.log(weatherlink);
     console.log(data.weather[0].main);
+    giphySearch=data.weather[0].main;
+    giphyLink=giphyapi+giphySearch+giphyLimtit;
+    console.log(giphyLink);
+    loadJSON(giphyLink,gotGiphy);
 
 }
 function gotGiphy(data){
